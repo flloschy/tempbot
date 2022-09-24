@@ -1,0 +1,25 @@
+{
+  "name": "tempbot",
+  "version": "0.0.0",
+  "description": "Template discord bot",
+  "main": "./src/index.js",
+  "scripts": {
+    "bot": "node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flloschy/tempbot.git"
+  },
+  "author": "Floschy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flloschy/tempbot/issues"
+  },
+  "homepage": "https://github.com/flloschy/tempbot#readme",
+  "dependencies": {
+    "discord.js": "^14.4.0",
+    "dotenv": "^16.0.2",
+    "logger": "^0.0.1"
+  }
+}
