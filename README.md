@@ -23,14 +23,14 @@ A little template discord bot made with [discord.js](https://discordjs.dev)(v14)
 
 ## Log system
 
-Everything gets locked into a logfile. That means no console output. By default the log file is `./logs/tempbot<date>.log`. \
+Everything gets locked into a logfile. That means no console output. By default the log file is [`./logs/tempbot<date>.log`](https://github.com/flloschy/tempbot/tree/main/logs). \
 You can choose between 5 log levels, these are `fatal, error, warn, info, debug`. \
-You can change this in the `config.js` file. *(why a js file? For comments ^^)*
+You can change this in the [`config.js`](https://github.com/flloschy/tempbot/blob/main/config.js) file. *(why a js file? For comments ^^)*
 
 ## Creating commands
 
 The system is build modular, so you dont need to do any handling or registering. \
-You can find an Example command in the `./src/commands/example` folder. \
+You can find an Example command in the [`./src/commands/example`](https://github.com/flloschy/tempbot/tree/main/src/commands/example) folder. \
 As you can see there is a `manager.js` and two folder called `group` and `subcommands`. \
 The only thing you need to do is to change the `name`, `shortdescription` and `longdescription` to your desire in the `manager.js` file. \
 
@@ -40,14 +40,14 @@ The only thing you need to do is to change the `name`, `shortdescription` and `l
 - When this is done you only need to change once again the `short-` and  `long-description` to your liking.
 - If needed you can add options to your command, the only thing to do is creating a dictionary in the `args` array. \
 *Please note that at the moment only String types are supported!*
-- Congrats! You have created a new command, now the coding can begin in  the `execute` function. \
+- Congrats! You have created a new command, now the coding can begin in the `execute` function. \
 
 #### Groups and Subcommands
 - If you want to create a group, you need to create a folder in the `group` folder and name it like the group. \
 *Please note that the folder name will be the group name*
 - After that you can create a subcommand in the newly created goupfolder. \
 *Please note that the file needs to be named like the command!*
-- From here on you can do the same steps as with the normal subcommands
+- From here on you can do the same steps as with the normal [subcommands](https://github.com/flloschy/tempbot#subcommand).
 
 ## File structure
 
