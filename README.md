@@ -58,7 +58,7 @@ Here is a litte overview of the file structure used for commands
 ```bash
 Templatebot
 └─ src
-   └─ commands
+   └─ commands #create folder here for new command
       └─ example #command name
          ├─ manager.js #command handler
          ├─ subcommands
