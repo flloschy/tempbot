@@ -19,7 +19,7 @@ A little template discord bot made with [discord.js](https://discordjs.dev)(v14)
 1 - Install dependencies with `npm i`. \
 2 - Create a file called `.env` and add your token to it like this: `TOKEN=yourtoken`, you also need to add the bots id `USERID=botid` and the server the bot will be active in `SERVERID=serverid`. \
 3 - Try if the bot runs `npm run bot`. \
-4 - If the bot runs, you can start coding. \
+4 - If the bot runs, you can start coding. 
 
 ## Log system
 
