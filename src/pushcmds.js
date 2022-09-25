@@ -9,11 +9,14 @@ const fs = require("fs");
 
 const config = require("../config")
 
-const logger = require("logger").createLogger(config.log.file);
-logger.setLevel(config.log.lvl);
-
 function builder(values) {
     function options(cmd, args) {
+        
+        if (args.minValue === undefined) args.minValue =  9007199254740991;
+        if (args.maxValue === undefined) args.maxValue = -9007199254740991;
+        if (args.minLength === undefined) args.minLength = 0;
+        if (args.maxLength === undefined) args.maxLength = 6000;
+
         switch (args.type) {
             case "STRING":
                 cmd.addStringOption((option) =>
@@ -21,6 +24,8 @@ function builder(values) {
                         .setName(args.name)
                         .setDescription(args.description)
                         .setRequired(args.required)
+                        .setMaxLength(args.maxLength)
+                        .setMinLength(args.minLength)
                 );
                 break;
             case "INTEGER":
@@ -28,6 +33,8 @@ function builder(values) {
                     option
                         .setName(args.name)
                         .setDescription(args.description)
+                        .setMaxValue(args.maxValue)
+                        .setMinValue(args.minValue)
                         .setRequired(args.required)
                 );
                 break;
@@ -76,6 +83,8 @@ function builder(values) {
                     option
                         .setName(args.name)
                         .setDescription(args.description)
+                        .setMaxValue(args.maxValue)
+                        .setMinValue(args.minValue)
                         .setRequired(args.required)
                 );
                 break;
@@ -131,8 +140,6 @@ function builder(values) {
 
 function build(dir) {
 
-    logger.debug(`Building command ${this.name}...`)
-
     const manager = require(`./commands/${dir}/manager.js`);
 
     const subcommandFiles = fs
@@ -175,13 +182,11 @@ function build(dir) {
 }
 
 
-logger.info("Building Commands...")
 const commands = [];
 fs.readdirSync("./src/commands").forEach((dir) => {
     commands.push(builder(build(dir)));
 });
 
-logger.info("Register Commands...")
 commands.map((command) => command.toJSON());
 
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
@@ -190,12 +195,5 @@ rest.put(
     Routes.applicationGuildCommands(process.env.USERID, process.env.SERVERID),
     { body: commands }
 )
-    .then((data) => {
-        logger.info(
-            `Registered Commands!`
-        )
-        logger.debug(
-            `${data.length} Commands in total.`
-        )}
-    )
-    .catch(logger.error);
+    .then((data) => {})
+    .catch();
