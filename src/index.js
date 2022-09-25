@@ -22,10 +22,10 @@ const client = new Client({
 client.commands = new Collection();
 
 //load commands
-const commandFiles = fs.readdirSync("./src/commands");
-for (const file of commandFiles) {
-    const command = require(`./commands/${file}/manager.js`);
-    client.commands.set(command.name, command);
+const commandFolders = fs.readdirSync("./src/commands");
+for (const folder of commandFolders) {
+    const command = require(`./commands/${folder}/manager.js`);
+    client.commands.set(folder, command);
 }
 
 ////
