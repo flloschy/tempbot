@@ -129,14 +129,57 @@ function builder(values) {
     return command;
 }
 
+function build(dir) {
+
+    logger.debug(`Building command ${this.name}...`)
+
+    const manager = require(`./commands/${dir}/manager.js`);
+
+    const subcommandFiles = fs
+        .readdirSync(`./src/commands/${dir}/subcommands`)
+        .filter((file) => file.endsWith(".js"));
+    for (const file of subcommandFiles) {
+        const command = require(`./commands/example/subcommands/${file}`);
+
+        manager.subcommands.push({
+            name: file.slice(0, -3),
+            description: command.shortdescription,
+            args: command.args,
+        });
+    }
+
+    const groupFiles = fs.readdirSync(`./src/commands/${dir}/group`);
+    for (const group of groupFiles) {
+        let json = { name: group, description: "None", subcommands: [] };
+
+        const subcommandFiles = fs
+            .readdirSync(`./src/commands/${dir}/group/${group}`)
+            .filter((file) => file.endsWith(".js"));
+        for (const file of subcommandFiles) {
+            const command = require(`./commands/${dir}/group/${group}/${file}`);
+            json.subcommands.push({
+                name: file.slice(0, -3),
+                description: command.shortdescription,
+                args: command.args,
+            });
+        }
+        manager.groups.push(json);
+    }
+    return {
+        name: dir,
+        description: manager.shortdescription,
+        args: manager.args,
+        subcommands: manager.subcommands,
+        groups: manager.groups,
+    };
+}
+
 
 logger.info("Building Commands...")
 const commands = [];
 fs.readdirSync("./src/commands").forEach((dir) => {
-    let manager = require(`./commands/${dir}/manager.js`);
-    commands.push(builder(manager.build()));
+    commands.push(builder(build(dir)));
 });
-
 
 logger.info("Register Commands...")
 commands.map((command) => command.toJSON());

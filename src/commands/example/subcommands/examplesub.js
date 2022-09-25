@@ -1,7 +1,4 @@
-
-
 module.exports = {
-    name: __filename.slice(__dirname.length + 1, -3),
     shortdescription: "ping",
     longdescription: "ping",
     args: [
@@ -10,6 +7,6 @@ module.exports = {
 
     //this gets called when new commandinteraction gets created
     execute: function(interaction) {
-        interaction.reply("pong! (subcmd 1)");
+        interaction.reply("[Subcommand](1) got executed: " + __filename.split("\\").pop());
     }
 }
