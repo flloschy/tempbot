@@ -39,7 +39,7 @@ The only thing you need to do is to change the `shortdescription` and `longdescr
 *Please note that the file name will be the command name*
 - When this is done you only need to change once again the `short-` and  `long-description` to your liking.
 - If needed you can add options to your command, the only thing to do is creating a dictionary in the `args` array. \
-*Please note that at the moment only String types are supported!*
+*Please note that at the moment all Input types work, but only Int, Num and String Value limits are supported*
 - Congrats! You have created a new command, now the coding can begin in the `execute` function. 
 
 #### Groups and Subcommands
