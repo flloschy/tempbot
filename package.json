@@ -1,6 +1,6 @@
 {
   "name": "tempbot",
-  "version": "0.0.0",
+  "version": "0.0.3",
   "description": "Template discord bot",
   "main": "./src/index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "url": "git+https://github.com/flloschy/tempbot.git"
   },
   "author": "Floschy",
-  "license": "ISC",
+  "license": "ACSL",
   "bugs": {
     "url": "https://github.com/flloschy/tempbot/issues"
   },
@@ -20,6 +20,6 @@
   "dependencies": {
     "discord.js": "^14.4.0",
     "dotenv": "^16.0.2",
-    "logger": "^0.0.1"
+    "winston": "^3.8.2"
   }
 }
