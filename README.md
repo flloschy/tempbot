@@ -49,7 +49,7 @@ The only thing you need to do is to change the `shortdescription` and `longdescr
 *Please note that the file name will be the command name*
 - From here on you can do the same steps as with the normal [subcommands](https://github.com/flloschy/tempbot#subcommand).
 
-*If you want to remove a command, you can just delete the command folder and it will removed*
+*If you want to remove a command, you can just delete the command folder and it will be removed*
 
 ## File structure
 
