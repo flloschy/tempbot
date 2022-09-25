@@ -32,7 +32,7 @@ You can change this in the [`config.js`](https://github.com/flloschy/tempbot/blo
 The system is build modular, so you dont need to do any handling or registering. \
 You can find an Example command in the [`./src/commands/example`](https://github.com/flloschy/tempbot/tree/main/src/commands/example) folder. \
 As you can see there is a `manager.js` and two folder called `group` and `subcommands`. \
-The only thing you need to do is to change the `shortdescription` and `longdescription` to your desire in the `manager.js` file. (the command name will be the foldername) \
+The only thing you need to do is to change the `shortdescription` and `longdescription` to your desire in the `manager.js` file. (the command name will be the foldername) 
 
 #### Subcommand
 - Further on you can easily add subcommands by coping the example `ping.js` from the `subcommand` folder. \
