@@ -2,11 +2,6 @@ const fs = require("fs");
 
 const config = require("../../../config.js");
 
-//create logger
-const logger = require("logger").createLogger(config.log.file);
-logger.setLevel(config.log.lvl);
-
-
 
 module.exports = {
     name: "example",
