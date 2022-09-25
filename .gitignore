@@ -106,3 +106,6 @@ dist
 # logs
 logs/
 !logs/.placeholder
+
+# packagelock
+package-lock.json
