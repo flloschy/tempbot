@@ -31,7 +31,7 @@ client.once("ready", async () => {
 
 client.on("interactionCreate", async (interaction) => {
     if (interaction.isCommand()) {
-        client.commands.get(interaction.commandName).execute(interaction);
+        await client.commands.get(interaction.commandName).execute(interaction);
     }
 });
 
