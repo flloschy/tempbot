@@ -101,7 +101,6 @@ function builder(values) {
         .setDescription(values.description);
 
     if (values.args.length > 0 && values.subcommands.length === 0 && values.groups.length === 0) {
-        console.log("args")
         values.args.forEach((arg) => {
             options(command, arg);
         })
