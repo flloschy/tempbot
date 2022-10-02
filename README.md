@@ -3,16 +3,23 @@ ___
 
 A little template discord bot made with [discord.js](https://discordjs.dev)(v14)
 
+___
+
 ## Features
 - [x] Automated command registration
 - [x] Easy command creator
 - [x] commandhandler without any actions needed
 - [x] log system
+- [x] other (command) options besides String
+- [..] on install avaliable tools
+   - [x] embed creator
+   - [ ] more to come
 - [ ] automated help command
 - [ ] handling of buttons and so on
 - [ ] cooldowns
-- [ ] other (command) options besides String
 - [ ] automated restart
+
+___
 
 ## Setup
 
@@ -21,18 +28,32 @@ A little template discord bot made with [discord.js](https://discordjs.dev)(v14)
 3 - Try if the bot runs `npm run bot`. \
 4 - If the bot runs, you can start coding. 
 
+___
+
 ## Log system
 
 Everything gets locked into a logfile. That means no console output. By default the log file is [`./logs/tempbot<date>.log`](https://github.com/flloschy/tempbot/tree/main/logs). \
 You can choose between 5 log levels, these are `fatal, error, warn, info, debug`. \
 You can change this in the [`config.js`](https://github.com/flloschy/tempbot/blob/main/config.js) file.
 
+___
+
 ## Creating commands
 
 The system is build modular, so you dont need to do any handling or registering. \
-You can find an Example command in the [`./src/commands/example`](https://github.com/flloschy/tempbot/tree/main/src/commands/example) folder. \
-As you can see there is a `manager.js` and two folder called `group` and `subcommands`. \
+You can find an Example command in the [`./src/commands/-example`](https://github.com/flloschy/tempbot/tree/main/src/commands/-example) folder. \
+*Put a `-`(minus) before the folder name to disable the command* \
+As you can see there is a `manager.js` and two folder called `groups` and `subcommands`. \
 The only thing you need to do is to change the `shortdescription` and `longdescription` to your desire in the `manager.js` file. (the command name will be the foldername) 
+
+#### Command options
+*Please note that you can only add options if you dont have any subcommands or groups* \
+*well... you can have subcommands and groups, but they get preffered over the command itself*
+- Create a folder called `command`
+- Create a file called `index.js` \
+*If you need any extra files for the command in there, you can but index is the file thats gets called on an interaction*
+- Add options in the args array in the manager file
+- Done
 
 #### Subcommand
 - Further on you can easily add subcommands by coping the example `ping.js` from the `subcommand` folder. \
@@ -43,7 +64,7 @@ The only thing you need to do is to change the `shortdescription` and `longdescr
 - Congrats! You have created a new command, now the coding can begin in the `execute` function. 
 
 #### Groups and Subcommands
-- If you want to create a group, you need to create a folder in the `group` folder and name it like the group. \
+- If you want to create a group, you need to create a folder in the `groups` folder and name it like the group. \
 *Please note that the folder name will be the group name*
 - After that you can create a subcommand in the newly created goupfolder. \
 *Please note that the file name will be the command name*
@@ -51,24 +72,42 @@ The only thing you need to do is to change the `shortdescription` and `longdescr
 
 *If you want to remove a command, you can just delete the command folder and it will be removed*
 
+___
+
 ## File structure
 
 Here is a litte overview of the file structure used for commands
 
-```bash
+```py
 Templatebot
 └─ src
    └─ commands #create folder here for new command
       └─ example #command name
          ├─ manager.js #command handler
+         ├─ command #command folder
+         │  └─ index.js #command file
          ├─ subcommands
          │  └─ examplesub.js #subcommand name
-         └─ group
+         └─ groups
             ├─ examplegroup1 #group name
             │  ├─ examplesub1.js #subcommand name
             │  └─ examplesub1.js  
             └─ examplegroup2       
                ├─ examplesub1.js
                └─ examplesub2.js
-
 ```
+___
+
+## Tools
+With the install of this bot you have some ready to good tools on your hand! \
+Those are little things which help you to have an consistant design across all your commands. \
+All the pre-installed tolls can be found there: `src/functions/base/tools.js`
+
+#### baseEmbed
+This is a little tool which only adds color, author and footer to an embed which gets returned.
+
+It needs the interaction and a color, the color can be a string which is pre determand in the config at `baseEmbed -> colors`, you can also add your template colors!
+
+You can give nothing and the color will be the display color of the bot. If you give an hexcode as color this will be used.
+
+The author can be configured in the config at `baseEmbed -> author`, there you can disable the author field, edit the text, edit the url and icon. The footer will always say `Requested by <user>` and the timestamp of the creation of the interaction.
