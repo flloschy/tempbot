@@ -6,6 +6,7 @@ const {
 
 const { REST, Routes } = require("discord.js");
 const fs = require("fs");
+const json = require("../config");
 
 const config = require("../config")
 
@@ -99,12 +100,14 @@ function builder(values) {
         .setName(values.name)
         .setDescription(values.description);
 
-    if (values.args && !values.subcommands && !values.groups)
+    if (values.args.length > 0 && values.subcommands.length === 0 && values.groups.length === 0) {
+        console.log("args")
         values.args.forEach((arg) => {
             options(command, arg);
-        });
+        })
+    }
 
-    if (values.subcommands)
+    if (values.subcommands) {
         values.subcommands.forEach((sub) => {
             let subcommand = new SlashCommandSubcommandBuilder()
                 .setName(sub.name)
@@ -115,8 +118,9 @@ function builder(values) {
                 });
             command.addSubcommand(subcommand);
         });
+    }
 
-    if (values.groups)
+    if (values.groups) {
         values.groups.forEach((group) => {
             let groupcommand = new SlashCommandSubcommandGroupBuilder()
                 .setName(group.name)
@@ -134,6 +138,7 @@ function builder(values) {
                 });
             command.addSubcommandGroup(groupcommand);
         });
+    }
 
     return command;
 }
@@ -142,36 +147,42 @@ function build(dir) {
 
     const manager = require(`./commands/${dir}/manager.js`);
 
-    const subcommandFiles = fs
-        .readdirSync(`./src/commands/${dir}/subcommands`)
-        .filter((file) => file.endsWith(".js"));
-    for (const file of subcommandFiles) {
-        const command = require(`./commands/example/subcommands/${file}`);
-
-        manager.subcommands.push({
-            name: file.slice(0, -3),
-            description: command.shortdescription,
-            args: command.args,
-        });
-    }
-
-    const groupFiles = fs.readdirSync(`./src/commands/${dir}/group`);
-    for (const group of groupFiles) {
-        let json = { name: group, description: "None", subcommands: [] };
-
+    if (fs.existsSync(`./src/commands/${dir}/subcommands`)) {
         const subcommandFiles = fs
-            .readdirSync(`./src/commands/${dir}/group/${group}`)
+            .readdirSync(`./src/commands/${dir}/subcommands`)
             .filter((file) => file.endsWith(".js"));
         for (const file of subcommandFiles) {
-            const command = require(`./commands/${dir}/group/${group}/${file}`);
-            json.subcommands.push({
+            const command = require(`./commands/${dir}/subcommands/${file}`);
+
+            manager.subcommands.push({
                 name: file.slice(0, -3),
                 description: command.shortdescription,
                 args: command.args,
             });
         }
-        manager.groups.push(json);
     }
+
+    if (fs.existsSync(`./src/commands/${dir}/groups`)) {
+        const groupFiles = fs.readdirSync(`./src/commands/${dir}/groups`);
+        for (const group of groupFiles) {
+            let json = { name: group, description: "None", subcommands: [] };
+
+            const subcommandFiles = fs
+                .readdirSync(`./src/commands/${dir}/groups/${group}`)
+                .filter((file) => file.endsWith(".js"));
+            for (const file of subcommandFiles) {
+                const command = require(`./commands/${dir}/groups/${group}/${file}`);
+                json.subcommands.push({
+                    name: file.slice(0, -3),
+                    description: command.shortdescription,
+                    args: command.args,
+                });
+            }
+            manager.groups.push(json);
+        }
+    }
+
+
     return {
         name: dir,
         description: manager.shortdescription,
@@ -183,7 +194,7 @@ function build(dir) {
 
 
 const commands = [];
-fs.readdirSync("./src/commands").forEach((dir) => {
+fs.readdirSync("./src/commands").filter((dir) => !dir.startsWith("-")).forEach((dir) => {
     commands.push(builder(build(dir)));
 });
 
@@ -196,4 +207,4 @@ rest.put(
     { body: commands }
 )
     .then((data) => {})
-    .catch();
+    .catch(console.error);
