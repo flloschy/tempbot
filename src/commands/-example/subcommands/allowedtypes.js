@@ -16,7 +16,7 @@ module.exports = {
     ],
 
     //this gets called when new commandinteraction gets created
-    execute: function(interaction) {
+    execute: async function(interaction) {
         interaction.reply("[Subcommand](1) got executed: " + __filename.split("\\").pop());
     }
 }
