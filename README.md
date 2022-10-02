@@ -11,7 +11,7 @@ ___
 - [x] commandhandler without any actions needed
 - [x] log system
 - [x] other (command) options besides String
-- [..] on install avaliable tools
+- [ ] on install avaliable tools
    - [x] embed creator
    - [ ] more to come
 - [ ] automated help command
