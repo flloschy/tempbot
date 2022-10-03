@@ -14,6 +14,7 @@ ___
 - [ ] on install avaliable tools
    - [x] embed creator
    - [ ] more to come
+- [x] Text only commands
 - [ ] automated help command
 - [ ] handling of buttons and so on
 - [ ] cooldowns
@@ -49,7 +50,8 @@ The only thing you need to do is to change the `shortdescription` and `longdescr
 #### Basic text command
 You can create text based commands, they cant take any arguments and only return a set embed! \
 To create such a command just go into the `config.js` under `textCommands`, just create a new dict and give it a `name`, `description` and `return` tag! *All of them are required!* \
-In the return tag you NEED to add an `title` and `description`, if you want you can also add `fields`, but they are not needed.
+In the return tag you NEED to add an `title` and `description`, if you want you can also add `fields`, but they are not needed. \
+If you dont want any text commands, just clear the `textCommands` array. *dont remove it*
 
 #### Command options
 *Please note that you can only add options if you dont have any subcommands or groups* \
