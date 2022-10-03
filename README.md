@@ -55,9 +55,6 @@ You can create text based commands, they cant take any arguments and only return
    - if you want you can also add `fields`, but they are not needed.
 - If you dont want any text commands, just clear the `textCommands` array. *dont remove it*
 
-
-
-
 #### Command options
 *Please note that you can only add options if you dont have any subcommands or groups* \
 *well... you can have subcommands and groups, but they get preffered over the command itself*
