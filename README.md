@@ -46,6 +46,11 @@ You can find an Example command in the [`./src/commands/-example`](https://githu
 As you can see there is a `manager.js` and two folder called `groups` and `subcommands`. \
 The only thing you need to do is to change the `shortdescription` and `longdescription` to your desire in the `manager.js` file. (the command name will be the foldername) 
 
+#### Basic text command
+You can create text based commands, they cant take any arguments and only return a set embed! \
+To create such a command just go into the `config.js` under `textCommands`, just create a new dict and give it a `name`, `description` and `return` tag! *All of them are required!* \
+In the return tag you NEED to add an `title` and `description`, if you want you can also add `fields`, but they are not needed.
+
 #### Command options
 *Please note that you can only add options if you dont have any subcommands or groups* \
 *well... you can have subcommands and groups, but they get preffered over the command itself*

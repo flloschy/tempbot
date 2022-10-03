@@ -22,7 +22,23 @@ baseEmbed: {
         // if icon is an empty string the icon of the client user will be used
         icon: ""
     }
-}
+},
+textCommands: [
+    {
+        // name and descriptions are always required!
+        name: "test", description: "example text command", 
+        return: {
+            // title and description are required!
+            title: "title", description: "description",
+            // fields are optional
+            fields: [
+                {name: "Example field0", value: "example value0", inline: true},
+                {name: "Example field1", value: "example value1", inline: true},
+                {name: "Example field2", value: "example value2", inline: false},
+            ]
+        }
+    }
+]
 
 
 /////

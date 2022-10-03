@@ -6,7 +6,6 @@ const {
 
 const { REST, Routes } = require("discord.js");
 const fs = require("fs");
-const json = require("../config");
 
 const config = require("../config")
 
@@ -196,6 +195,23 @@ const commands = [];
 fs.readdirSync("./src/commands").filter((dir) => !dir.startsWith("-")).forEach((dir) => {
     commands.push(builder(build(dir)));
 });
+
+if (config.textCommands.length !== 0) {
+    const textcommands = new SlashCommandBuilder()
+        .setName("text")
+        .setDescription("Commands which only return a predefined embed")
+
+    config.textCommands.forEach((cmd) => {
+        let sub = new SlashCommandSubcommandBuilder()
+            .setName(cmd.name)
+            .setDescription(cmd.description)
+        textcommands.addSubcommand(sub)
+    })
+
+    commands.push(textcommands)
+}
+
+
 
 commands.map((command) => command.toJSON());
 
