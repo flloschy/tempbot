@@ -8,7 +8,7 @@ function fixTimeStamp(timeStamp) {
 
 module.exports = {
     shortdescription: "who are you?",
-    longdescription: "returns some info about your account and server profile",
+    longdescription: "returns some info about the given user and server profile",
     args: [
         {name:'user', description:'which user info gets shown', type:'USER', required:true}
     ],
