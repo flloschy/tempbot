@@ -8,10 +8,10 @@ log: {
 },
 baseEmbed: {
     colors: {
-        warning: 0x7de39,
-        error: 0x7de39,
-        info: 0x7de39,
-        success: 0x7de39
+        warning: 0xc7744c,
+        error: 0xc74c4c,
+        info: 0xc7bc4c,
+        success: 0x59c74c
     },
     author: {
         enabled: true,
