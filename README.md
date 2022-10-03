@@ -15,7 +15,7 @@ ___
    - [x] embed creator
    - [ ] more to come
 - [x] Text only commands
-- [ ] automated help command
+- [x] automated help command
 - [ ] handling of buttons and so on
 - [ ] cooldowns
 - [ ] automated restart
