@@ -45,7 +45,7 @@ module.exports = {
                     bagets.push("Bug Hunter");
                     return;
                 case 'BugHunterLevel2':
-                    bagets.push("Bug Hunter lvl2");
+                    bagets.push("Bug Hunter lvl.2");
                     return;
                 default:
                     bagets.push(flag);
