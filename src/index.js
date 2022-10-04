@@ -1,13 +1,12 @@
 //load env variables
 require("dotenv").config();
-
 require("./pushcmds.js");
 
 //load stuff
 const config = require("../config.js");
 const fs = require("fs");
 const tools = require("./functions/base/tools")
-
+const logger = require("./functions/base/logger")
 
 //create client
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
@@ -37,12 +36,29 @@ if (config.textCommands) {
 
 //on ready
 client.once("ready", async () => {
+    logger.info("Client Started")
+    logger.debug(
+        `tag:\t${client.user.tag}`,
+        `ID:\t${client.user.id}`,
+        `Client in ${client.guilds.cache.size} guild(s)`
+    )
+
 });
 
 client.on("interactionCreate", async (interaction) => {
     if (interaction.isCommand()) {
-        if (interaction.commandName === "text") {
 
+        logger.debug(
+            "New command interaction",
+            `Command name: ${interaction.commandName}`,
+            `Group name:   ${interaction.options.getSubcommandGroup()}`,
+            `Sub name:     ${interaction.options.getSubcommand()}`,
+            `Server:       ${interaction.guildId}`,
+            `Caller:       ${interaction.user.tag}`,
+            `Caller ID:    ${interaction.user.id}`,
+        )
+
+        if (interaction.commandName === "text") {
             let ret = client.commands.get(`text-${interaction.options.getSubcommand()}`)
 
             let embed = await tools.baseEmbed(interaction, "success")
@@ -66,5 +82,5 @@ client.on("interactionCreate", async (interaction) => {
 //log in
 client
     .login(process.env.TOKEN)
-    .then(() => {})
-    .catch((err) => console.log(err));
+    .then(() => {logger.info("Loggin successful")})
+    .catch((err) => {logger.fatal("Loggin failure", err.split("\n")); process.exit(1)});
