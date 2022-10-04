@@ -1,5 +1,6 @@
 const tools = require("../../../functions/base/tools")
 const fs = require('fs')
+const logger = require("../../../functions/base/logger")
 
 module.exports = {
     shortdescription: "See what commands do",
@@ -46,6 +47,17 @@ module.exports = {
             embed.setTitle("Command not found")
             embed.setDescription("- " + errormessages.join("\n- "))
             interaction.reply({embeds:[embed]})
+
+            logger.error(
+                "Help command error",
+                "arguments:",
+                `   cmdName:   ${cmdName}`,
+                `   groupName: ${groName}`,
+                `   subName:   ${subName}`,
+                `Errors:`,
+                "   " + errormessages.join("\n         ")
+            )
+
             return
         }
 
