@@ -4,10 +4,12 @@ const {
     SlashCommandSubcommandGroupBuilder,
 } = require("@discordjs/builders");
 
+
 const { REST, Routes } = require("discord.js");
 const fs = require("fs");
-
+const logger = require("./functions/base/logger")
 const config = require("../config")
+
 
 function builder(values) {
     function options(cmd, args) {
@@ -219,7 +221,6 @@ const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
 rest.put(
     Routes.applicationGuildCommands(process.env.USERID, process.env.SERVERID),
-    { body: commands }
-)
-    .then((data) => {})
-    .catch(console.error);
+    { body: commands })
+.then((data) => {logger.info(`All commands pushed`); logger.debug(`${data.size} Command(s) pushed`)})
+.catch((err) => logger.fatal(err.split("\n")));
