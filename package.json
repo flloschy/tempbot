@@ -19,7 +19,6 @@
   "homepage": "https://github.com/flloschy/tempbot#readme",
   "dependencies": {
     "discord.js": "^14.4.0",
-    "dotenv": "^16.0.2",
-    "winston": "^3.8.2"
+    "dotenv": "^16.0.2"
   }
 }
