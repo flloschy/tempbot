@@ -45,6 +45,6 @@ module.exports = {
         )
 
 
-        interaction.reply({embeds:[embed]});
+        await interaction.editReply({ephemeral: false, embeds:[embed]});
     }
 }

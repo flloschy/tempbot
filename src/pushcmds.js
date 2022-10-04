@@ -222,5 +222,5 @@ const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 rest.put(
     Routes.applicationGuildCommands(process.env.USERID, process.env.SERVERID),
     { body: commands })
-.then((data) => {logger.info(`All commands pushed`); logger.debug(`${data.size} Command(s) pushed`)})
+.then((data) => {logger.info(`All commands pushed`); logger.debug(`${data.length} Command(s) pushed`)})
 .catch((err) => logger.fatal(err.split("\n")));

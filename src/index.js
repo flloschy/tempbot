@@ -11,7 +11,7 @@ const logger = require("./functions/base/logger")
 //create client
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildPresences],
 });
 
 // create client.commands collection
@@ -58,6 +58,8 @@ client.on("interactionCreate", async (interaction) => {
             `Caller ID:    ${interaction.user.id}`,
         )
 
+        await interaction.deferReply({ephemeral: true})
+
         if (interaction.commandName === "text") {
             let ret = client.commands.get(`text-${interaction.options.getSubcommand()}`)
 
@@ -69,7 +71,7 @@ client.on("interactionCreate", async (interaction) => {
                 embed.addFields(ret.fields)
             }
 
-            interaction.reply({embeds:[embed]})
+            await interaction.editReply({ephemeral:false, embeds:[embed]})
 
             return
         }

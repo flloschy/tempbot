@@ -36,6 +36,6 @@ module.exports = {
                 return
             }
         
-        interaction.reply("Something went wrong");
+            await interaction.editReply({ephemeral: false, content:"Something went wrong"});
     }
 };

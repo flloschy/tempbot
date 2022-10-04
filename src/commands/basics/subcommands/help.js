@@ -46,7 +46,7 @@ module.exports = {
             const embed = await tools.baseEmbed(interaction, "error")
             embed.setTitle("Command not found")
             embed.setDescription("- " + errormessages.join("\n- "))
-            interaction.reply({embeds:[embed]})
+            await interaction.editReply({ephemeral: false, embeds:[embed]})
 
             logger.error(
                 "Help command error",
@@ -98,6 +98,6 @@ module.exports = {
         embed.setThumbnail(interaction.client.user.displayAvatarURL({ dynamic: true, size: 1024 }))
         embed.addFields(arguments)
 
-        interaction.reply({embeds:[embed]})
+        await interaction.editReply({ephemeral: false, embeds:[embed]})
     }
 }

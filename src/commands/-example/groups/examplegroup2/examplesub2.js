@@ -7,6 +7,6 @@ module.exports = {
 
     //this gets called when new commandinteraction gets created
     execute: async function (interaction) {
-        interaction.reply("[Group](2) [Subcommand](2) got executed: " + __filename.split("\\").pop());
+        await interaction.editReply({ephemeral: false, content:"[Subcommand](1) got executed: " + __filename.split("\\").pop()});
     },
 };
