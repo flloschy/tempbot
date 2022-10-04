@@ -4,7 +4,13 @@ let json = {
 
 log: {
     "file": `./logs/tempbot-${new Date().getUTCDate() + "." + new Date().getUTCMonth() + "." + new Date().getUTCFullYear()}.log`,
-    "lvl": "debug" // fatal, error, warn, info, debug
+    "console": true,
+    "log": {
+        1: true, //info
+        2: true, //debug
+        3: true, //error
+        4: true  //fatal
+    }
 },
 baseEmbed: {
     colors: {
