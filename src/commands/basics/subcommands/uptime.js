@@ -22,6 +22,6 @@ module.exports = {
            .setTitle(`Uptime`)
            .setDescription(`Im already up since **${days}** days, **${hours}** hours, **${minutes}** minutes and **${seconds}** seconds`)
 
-           await interaction.editReply({ephemeral: false, embeds:[embed]});
+           await interaction.editReply({embeds:[embed]});
     }
 }

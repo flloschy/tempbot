@@ -58,7 +58,7 @@ client.on("interactionCreate", async (interaction) => {
             `Caller ID:    ${interaction.user.id}`,
         )
 
-        await interaction.deferReply({ephemeral: true})
+        await interaction.deferReply()
 
         if (interaction.commandName === "text") {
             let ret = client.commands.get(`text-${interaction.options.getSubcommand()}`)
@@ -71,7 +71,7 @@ client.on("interactionCreate", async (interaction) => {
                 embed.addFields(ret.fields)
             }
 
-            await interaction.editReply({ephemeral:false, embeds:[embed]})
+            await interaction.editReply({embeds:[embed]})
 
             return
         }

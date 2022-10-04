@@ -13,6 +13,6 @@ module.exports = {
         embed.setTitle("Ping")
         embed.setDescription(`PONG! The current ping from host to discord is **${ping}ms**`)
 
-        await interaction.editReply({ephemeral: false, embeds:[embed]})
+        await interaction.editReply({embeds:[embed]})
     }
 }
