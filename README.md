@@ -33,10 +33,11 @@ ___
 
 ## Log system
 
-Everything gets locked into a logfile. That means no console output. By default the log file is [`./logs/tempbot<date>.log`](https://github.com/flloschy/tempbot/tree/main/logs). \
-You can choose between 5 log levels, these are `fatal, error, warn, info, debug`. \
-You can change this in the [`config.js`](https://github.com/flloschy/tempbot/blob/main/config.js) file.
-
+Everything gets locked into a logfile. By default the log file is [`./logs/tempbot<date>.log`](https://github.com/flloschy/tempbot/tree/main/logs). \
+You can choose 4 log levels, which should get logged these are `fatal (=4), error (=3), debug (=2), info (=1)`. \
+You can change this in the [`config.js`](https://github.com/flloschy/tempbot/blob/main/config.js) file. \
+There you can activate each log level individual, just by changing the boolean in the config at `log -> log -> [1-4]`. \
+Also, you can activate console logging and deactivate file logging by clearing the string. *There will be an error when no console and file logging are activated, but the bot will continue running.*
 ___
 
 ## Creating commands
