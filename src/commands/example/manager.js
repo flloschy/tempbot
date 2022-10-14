@@ -13,7 +13,6 @@ module.exports = {
 
 
     execute: async function (interaction) {
-        
         if (this.subcommands.length == 0 && this.groups.length == 0) {
             const command = require(`./command/index.js`);
             await command.execute(interaction);
@@ -36,6 +35,6 @@ module.exports = {
                 return
             }
         
-            await interaction.editReply({content:"Something went wrong"});
+        await interaction.editReply({content:"Something went wrong"});
     }
 };

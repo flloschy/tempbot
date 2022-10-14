@@ -10,8 +10,9 @@ const logger = require("./functions/base/logger")
 
 //create client
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
+const { randomInt } = require("crypto");
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildPresences],
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildVoiceStates],
 });
 
 // create client.commands collection
@@ -76,6 +77,50 @@ client.on("interactionCreate", async (interaction) => {
             return
         }
         await client.commands.get(interaction.commandName).execute(interaction);
+    } else if (interaction.isButton()) {
+        if (interaction.message.interaction.commandName === undefined) return
+        let cmd = interaction.message.interaction.commandName.split(" ")
+        if (cmd.length == 1) {
+            let command = require(`./commands/${cmd[0]}/command/index.js`)
+            if (command.button == undefined) {
+                logger.error("Button has no function attached.", "Cant find button function in:", `\t./commands/${cmd[0]}/command/index.js`)
+                return
+            }
+            await interaction.deferReply()
+            await command.button(interaction)
+        } else if (cmd.length == 2) {
+            let command = require(`./commands/${cmd[0]}/subcommands/${cmd[1]}.js`)
+            if (command.button == undefined) {
+                logger.error("Button has no function attached.", "Cant find button function in:", `\t./commands/${cmd[0]}/subcommands/${cmd[1]}.js`)
+                return
+            }
+            await interaction.deferReply()
+            await command.button(interaction)
+        } else if (cmd.length == 3) {
+            let command = require(`./commands/${cmd[0]}/groups/${cmd[1]}/${cmd[2]}.js`)
+            if (command.button == undefined) {
+                logger.error("Button has no function attached.", "Cant find button function in:", `.\t/commands/${cmd[0]}/groups/${cmd[1]}/${cmd[2]}.js`)
+                return
+            }
+            await interaction.deferReply()
+            await command.button(interaction)
+        }
+    } else if (interaction.isAutocomplete()) {
+        if (interaction.commandName === undefined) return
+        let cmd
+        if (interaction.options.getSubcommandGroup() !== null) {
+            cmd = `./commands/${interaction.commandName}/groups/${interaction.options.getSubcommandGroup()}/${interaction.options.getSubcommand()}.js`
+        } else if (interaction.options.getSubcommand() !== null) {
+            cmd = `./commands/${interaction.commandName}/subcommands/${interaction.options.getSubcommand()}.js`
+        } else {
+            cmd = `./commands/${interaction.commandName}/command/index.js`
+        }
+        if (cmd.length < 5) return
+        let command = require(cmd)
+        if (command.autocomplete === undefined) {
+            logger.error("Autocomplete has no function attached.", "Cant find autocomplete function in:", `.\t${cmd}`)
+        }
+        await command.autocomplete(interaction)
     }
 });
 
@@ -85,4 +130,4 @@ client.on("interactionCreate", async (interaction) => {
 client
     .login(process.env.TOKEN)
     .then(() => {logger.info("Loggin successful")})
-    .catch((err) => {logger.fatal("Loggin failure", err.split("\n")); process.exit(1)});
+    .catch((err) => {logger.fatal("Loggin failure", err); process.exit(1)});

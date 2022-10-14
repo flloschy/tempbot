@@ -25,9 +25,10 @@ function builder(values) {
                     option
                         .setName(args.name)
                         .setDescription(args.description)
-                        .setRequired(args.required)
                         .setMaxLength(args.maxLength)
                         .setMinLength(args.minLength)
+                        .setRequired(args.required === undefined ? false : true)
+                        .setAutocomplete(args.autocomplete === undefined ? false : true)
                 );
                 break;
             case "INTEGER":
@@ -37,7 +38,8 @@ function builder(values) {
                         .setDescription(args.description)
                         .setMaxValue(args.maxValue)
                         .setMinValue(args.minValue)
-                        .setRequired(args.required)
+                        .setRequired(args.required === undefined ? false : true)
+                        .setAutocomplete(args.autocomplete === undefined ? false : true)
                 );
                 break;
             case "BOOLEAN":
@@ -45,7 +47,7 @@ function builder(values) {
                     option
                         .setName(args.name)
                         .setDescription(args.description)
-                        .setRequired(args.required)
+                        .setRequired(args.required === undefined ? false : true)
                 );
                 break;
             case "USER":
@@ -53,7 +55,7 @@ function builder(values) {
                     option
                         .setName(args.name)
                         .setDescription(args.description)
-                        .setRequired(args.required)
+                        .setRequired(args.required === undefined ? false : true)
                 );
                 break;
             case "CHANNEL":
@@ -61,7 +63,7 @@ function builder(values) {
                     option
                         .setName(args.name)
                         .setDescription(args.description)
-                        .setRequired(args.required)
+                        .setRequired(args.required === undefined ? false : true)
                 );
                 break;
             case "ROLE":
@@ -69,7 +71,7 @@ function builder(values) {
                     option
                         .setName(args.name)
                         .setDescription(args.description)
-                        .setRequired(args.required)
+                        .setRequired(args.required === undefined ? false : true)
                 );
                 break;
             case "MENTIONABLE":
@@ -77,7 +79,7 @@ function builder(values) {
                     option
                         .setName(args.name)
                         .setDescription(args.description)
-                        .setRequired(args.required)
+                        .setRequired(args.required === undefined ? false : true)
                 );
                 break;
             case "NUMBER":
@@ -87,7 +89,8 @@ function builder(values) {
                         .setDescription(args.description)
                         .setMaxValue(args.maxValue)
                         .setMinValue(args.minValue)
-                        .setRequired(args.required)
+                        .setRequired(args.required === undefined ? false : true)
+                        .setAutocomplete(args.autocomplete === undefined ? false : true)
                 );
                 break;
             default:
@@ -98,7 +101,7 @@ function builder(values) {
     ////
 
     let command = new SlashCommandBuilder()
-        .setName(values.name)
+        .setName(values.name.toLowerCase())
         .setDescription(values.description);
 
     if (values.args.length > 0 && values.subcommands.length === 0 && values.groups.length === 0) {
@@ -110,7 +113,7 @@ function builder(values) {
     if (values.subcommands) {
         values.subcommands.forEach((sub) => {
             let subcommand = new SlashCommandSubcommandBuilder()
-                .setName(sub.name)
+                .setName(sub.name.toLowerCase())
                 .setDescription(sub.description);
             if (sub.args)
                 sub.args.forEach((arg) => {
@@ -123,7 +126,7 @@ function builder(values) {
     if (values.groups) {
         values.groups.forEach((group) => {
             let groupcommand = new SlashCommandSubcommandGroupBuilder()
-                .setName(group.name)
+                .setName(group.name.toLowerCase())
                 .setDescription(group.description);
             if (group.subcommands)
                 group.subcommands.forEach((sub) => {

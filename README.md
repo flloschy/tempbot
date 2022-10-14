@@ -16,7 +16,11 @@ ___
    - [ ] more to come
 - [x] Text only commands
 - [x] automated help command
-- [ ] handling of buttons and so on
+- [ ] handling of...
+   - [x] ... buttons
+   - [ ] ... menues
+   - [ ] ... models
+   - [ ] ... 
 - [ ] cooldowns
 - [ ] automated restart
 

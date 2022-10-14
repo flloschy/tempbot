@@ -1,6 +1,6 @@
 module.exports = {
-    shortdescription: "base commands",
-    longdescription: "Basic commands which get delivered with this template",
+    shortdescription: "testing n stuff",
+    longdescription: "testing araound",
 
     args: [],
     subcommands: [],
@@ -31,6 +31,6 @@ module.exports = {
                 return
             }
         
-        await interaction.editReply({ephemeral: false, content:"Something went wrong"});
+            await interaction.editReply({content:"Something went wrong"});
     }
 };

@@ -66,6 +66,6 @@ module.exports = {
                 {name:`Bagets`,          value: bagets.length ? bagets.join(", ") : "No bagets"},
             )
 
-            await interaction.editReply({embeds:[embed]});
+        await interaction.editReply({embeds:[embed]});
     }
 }
