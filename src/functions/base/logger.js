@@ -1,6 +1,6 @@
 const config = require("../../../config");
 const fs = require('fs');
-var colors = require('colors');
+require('colors');
 
 let loglvl = config.log.log
 
